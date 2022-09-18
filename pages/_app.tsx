@@ -1,15 +1,21 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import DashboardLayout from "../components/DashboardLayout/DashboardLayout";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
+import DefaultLayout from "../layout/DefaultLayout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface AppStateProps extends AppProps {
+  Component: any;
+}
+
+function MyApp({ Component, pageProps }: AppStateProps) {
+  const Layout = Component.Layout || DefaultLayout;
+
   return (
     <ThemeProvider theme={theme}>
-      <DashboardLayout>
+      <Layout>
         <Component {...pageProps} />
-      </DashboardLayout>
+      </Layout>
     </ThemeProvider>
   );
 }
